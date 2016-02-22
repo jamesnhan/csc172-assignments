@@ -9,7 +9,9 @@
  * This class contains the definition of the Piece object for use in the
  * Connect4 game.
  *
- * @see Connect4
+ * @author 		James Nhan
+ * @since		1.0
+ * @see 		Connect4
  */
 public class Piece {
     private int owner;

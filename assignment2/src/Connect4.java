@@ -10,8 +10,9 @@ import java.util.Scanner;
 /**
  * This class contains the definition of a game of Connect4
  *
- * @see Board
- * @see Piece
+ * @author 		James Nhan
+ * @since		1.0
+ * @see 		Board
  */
 public class Connect4 {
     /**
@@ -39,35 +40,37 @@ public class Connect4 {
     public static void playGame(Scanner input) {
         int player = PLAYER2;
         int winner = NOPLAYER;
-        int p1Moves = 0;
-        int p2Moves = 0;
+        int moves = 0;
 
         Board board = new Board();
         System.out.println(board);
 
         while (winner == NOPLAYER) {
             player = (player == PLAYER1) ? PLAYER2 : PLAYER1;
-            if (winner == Connect4.PLAYER1) {
-                ++p1Moves;
-            }else {
-                ++p2Moves;
-            }
+            ++moves;
 
             int value = -1;
             do {
                 System.out.print("(Player " + player + ") Enter a column to move to: ");
+                // Wait for a valid input value, ignoring non-numeric values
                 while (!input.hasNextInt()) {
                     input.nextLine();
                 }
                 value = input.nextInt();
+                // Validate the input
                 if (value < 0 || value >= Board.WIDTH) {
+                	// If it's not within the valid range, set it to -1
                     System.out.println("Invalid input!");
                     value = -1;
                 } else {
+                	// Else try to make a move
                     if (!board.makeMove(value, player)) {
+                    	// Failure sets value to -1
+                    	System.out.println("Column is full!");
                         value = -1;
                     }
                 }
+                // Continue asking for a column if the value is -1
             } while (value == -1);
 
             System.out.println(board);
@@ -76,6 +79,6 @@ public class Connect4 {
         }
 
         System.out.println("Congratulations Player " + winner + "!!!");
-        System.out.println("You won in " + ((winner == Connect4.PLAYER1) ? p1Moves : p2Moves) + " moves!!!");
+        System.out.println("You won in " + moves + " moves!!!");
     }
 }
