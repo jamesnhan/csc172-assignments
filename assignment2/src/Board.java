@@ -59,10 +59,10 @@ public class Board {
         lastColumn = 0;
         
         // Fill the board with Pieces owned by NOPLAYER
-        for (int i = 0; i < HEIGHT; ++i) {
+        for (int i = 0; i < WIDTH; ++i) {
             lastMove[i] = -1;
-            for (int j = 0; j < WIDTH; ++j) {
-                pieces[i][j] = new Piece();
+            for (int j = 0; j < HEIGHT; ++j) {
+                pieces[j][i] = new Piece();
             }
         }
     }
@@ -259,7 +259,7 @@ public class Board {
      */
     public boolean makeMove(int column, int player) {
     	// Check for a valid move
-        if (lastMove[column] > HEIGHT - 1) {
+        if (lastMove[column] > WIDTH - 1) {
             return false;
         }
 
